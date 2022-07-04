@@ -73,8 +73,19 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
         search(&config.query, &contents)
     };
 
-    for line in results {
-        println!("{}", line);
+    if results.is_empty() {
+        println!(
+            "\nNo lines were found that match the query in \
+            the given file.\n"
+        )
+    } else {
+        println!(
+            "\nFound the following lines that \
+            match the query in the given file:"
+        );
+        for line in results {
+            println!("{}", line);
+        }
     }
 
     Ok(())
