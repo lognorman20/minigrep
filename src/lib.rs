@@ -2,10 +2,12 @@ use std::error::Error;
 use std::env;
 use std::fs;
 
+/* Tests */
 #[cfg(test)]
 mod tests {
     use super::*;
-
+    
+    // Searches for query case sensitive
     #[test]
     fn case_sensitive() { 
         let query = "duct";
@@ -13,9 +15,13 @@ mod tests {
 Rust:
 safe, fast, productive.
 Pick three.";
-        assert_eq!(vec!["safe, fast, productive."], search(query, contents));
+        assert_eq!(
+            vec!["safe, fast, productive."], 
+            search(query, contents)
+        );
     }
 
+    // Searches for the query canse insensitive
     #[test]
     fn case_insensitive() {
         let query: &str = "rUsT";
@@ -32,6 +38,7 @@ Trust me.";
     }
 }
 
+/* Core functions */
 pub fn search_case_insensitive<'a>(
     query: &str, 
     contents: &'a str
@@ -73,6 +80,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+/* Models */
 pub struct Config {
     pub query: String,
     pub filename: String,
